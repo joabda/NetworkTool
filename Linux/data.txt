@@ -1,0 +1,45 @@
+			Home at: 192.168.1.1
+192.168.1.1
+ Host is up
+ Latency: 0.043s.
+ MAC Adress: 
+	80/open,tcp:http
+
+192.168.1.100
+ Host is up
+ Latency: 0.064s.
+ MAC Adress: 
+	8080/open,tcp:http-proxy
+
+192.168.1.103
+ Host is up
+ Latency: 0.018s.
+ MAC Adress: 
+	5555/open,tcp:freeciv
+
+192.168.1.104
+ Host is up
+ Latency: 8.4e-05s.
+ MAC Adress: 0
+
+192.168.1.109
+ Host is up
+ Latency: 0.0038s.
+ MAC Adress: 0
+
+192.168.1.114
+ Host is up
+ Latency: 0.066s.
+ MAC Adress: 
+	1812/,tcp:iltered radius
+	5550/,tcp:iltered sdadmind
+	8254/,tcp:iltered unknown
+	10215/filtered,tcp:nknown
+
+192.168.1.115
+ Host is up
+ Latency: 0.012s.
+ MAC Adress: 
+	62078/open,tcp:iphone-sync
+
+

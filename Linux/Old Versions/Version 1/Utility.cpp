@@ -16,6 +16,8 @@ void deleteFile(ostream &log, const string& toDelete)
 		log << "Error: Unable to deleted " << toDelete << "." << endl;
 }
 
+// No need for all of those functions (under)
+
 void reAllocListOfHosts(ListOfHosts& listRealloc)
 {
 	*listRealloc.element = new Host[listRealloc.capacity * 2];

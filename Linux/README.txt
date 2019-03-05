@@ -11,5 +11,25 @@ To compile go to the terminal:
 	* Compile : "make" (a makefile is included with your download)
 	* Execute : "./NetworkTool"
 
-You can use "make clean" to clean your directory from .o files.
+You can use :
+	"make clean" 	to clean your directory from .o files.
+	"make debug" 	to add -g flag so you can debug the program
+	"make run"	to make and run the program at the same time
+	"make cleanLog"	to remove the log file (logFile.txt)
 
+List of Errors that could occur:
+
+Number		| Meaning					|
+----------------|-----------------------------------------------|
+1		| Network's Ip could not be found               |
+----------------|-----------------------------------------------|
+2		| Creating Host/Port without parameters		|
+----------------|-----------------------------------------------|
+3		| File could not be opened			|
+----------------|-----------------------------------------------|
+4		|
+----------------|-----------------------------------------------|
+5		|
+----------------|-----------------------------------------------|
+6		|
+----------------|-----------------------------------------------|

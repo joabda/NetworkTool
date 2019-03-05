@@ -6,6 +6,9 @@
 
 using namespace std;
 
+
+// No more need for that
+
 void printHosts(ostream &log, ListOfHosts& listHosts)
 // In this function we are printing the informations we have on each host
 // That we gathered from the nmap output file 

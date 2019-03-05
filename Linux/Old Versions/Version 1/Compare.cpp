@@ -62,7 +62,7 @@ void readData(ostream& log, ListOfHosts& list, ifstream& fileI)
 			string line;
 			fileI >> line;
 
-			if (line.find("0.") != -1)
+			if (line.find("0.") != string::npos)
 				currHost->macAdress = line;
 
 			fileI >> currHost->latency;
@@ -88,7 +88,7 @@ void readData(ostream& log, ListOfHosts& list, ifstream& fileI)
 			string line;
 			fileI >> line;
 
-			if (line.find("0.") != -1)
+			if (line.find("0.") != string::npos)
 				currHost->macAdress = line;
 
 			fileI >> currHost->latency;
@@ -179,7 +179,7 @@ void comparingData(ofstream& log, ListOfHosts& listHosts)
 					break;
 				}
 			}
-			if (exists = false)
+			if (exists == false)
 				resultsFile << "MAC Adress " << curr->macAdress << " CLOSED it's connection to the network" << endl;
 		}
 		resultsFile << "--------------------------------------------------------------------------------------------------------" << endl;

@@ -1,35 +1,35 @@
-
-
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 CC= g++
-EXEC = $(CC) -o $@ -c $< $(CFLAGS)
+EXEC = NetworkTool
 
-NetworkTool: main.o Utility.o nmap.o Process.o Output.o Compare.o 
+$(EXEC): main.o Host.o Network.o Port.o
 	$(CC) -o $@ $^ $(CFLAGS)
 
-main.o: main.cpp Utility.h nmap.h Process.h Output.h Compare.h
-	$(EXEC)
+main.o: main.cpp Host.o Network.o Port.o
+	$(CC) -o $@ -c $< $(CFLAGS)
 
-Utility.o: Utility.cpp Utility.h
-	$(EXEC)
+Network.o: Network.cpp Network.h Host.h
+	$(CC) -o $@ -c $< $(CFLAGS)
 
-nmap.o: nmap.cpp nmap.h Utility.h
-	$(EXEC)
+Host.o: Host.cpp Host.h Port.h
+	$(CC) -o $@ -c $< $(CFLAGS)
 
-Process.o: Process.cpp Process.h Utility.h
-	$(EXEC)
-
-Output.o: Output.cpp Output.h Utility.h
-	$(EXEC)
-
-Compare.o: Compare.cpp Compare.h Utility.h
-	$(EXEC)
+Port.o: Port.cpp Port.h
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm *.o && rm NetworkTool
-	rm *.txt
+	rm *.o && rm NetworkTool 
+#&& rm temporary.txt && rm NmapOutput.txt
 
+cleanLog:
+	rm logFile.txt
 
+debug: 
+	CFLAGS+= -g
+	$(EXEC)
+	
+debug-memory: $(EXEC)
+	valgrind --leak-check=full -v --show-leak-kinds=all --track-origins=yes ./$(EXEC)
 
-
-
+run: $(EXEC)
+	./$(EXEC)

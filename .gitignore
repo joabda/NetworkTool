@@ -1,4 +1,6 @@
 *.o
 *.out
 *.hex
-
+NmapOutput.txt
+logFile.txt
+temporary.txt
