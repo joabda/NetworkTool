@@ -1,9 +1,14 @@
 {
     "files.associations": {
-        "iosfwd": "cpp",
         "iostream": "cpp",
+        "*.tcc": "cpp",
+        "iosfwd": "cpp",
+        "stdexcept": "cpp",
         "fstream": "cpp",
+        "new": "cpp",
+        "set": "cpp",
         "ostream": "cpp",
-        "*.tcc": "cpp"
-    }
+        "string": "cpp"
+    },
+    "python.pythonPath": "/home/ja/anaconda3/bin/python"
 }
