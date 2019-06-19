@@ -1,5 +1,4 @@
-#ifndef NETWORK_H
-#define NETWORK_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -11,6 +10,8 @@
 #include "Algorithm.h"
 #include "Manager.h"
 #include "Host.h"
+#include "DataBase.h"
+#include "Compare.h"
 using namespace std;
 
 static string nmapOutputFileName = "NmapOutput.txt";
@@ -35,17 +36,16 @@ public:
     void nmapCommand();
     void findIp();
     void processNmapData();
+    void compareToDB();
 
     Network& operator+= (Host* hostToAdd);
     friend ostream& operator<< (ostream& os, const Network& networkPrint); 
 
 private:
+    //DataBase db_;
     string name_;
     string ip_;
     string prefix_;
     ofstream log_;
 };
-
 void deleteFile(ostream &log, const string& toDelete);
-
-#endif

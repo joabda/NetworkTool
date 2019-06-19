@@ -1,5 +1,4 @@
-#ifndef PORT_H
-#define PORT_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -32,4 +31,3 @@ private:
     string state_;
     string service_;
 };
-#endif

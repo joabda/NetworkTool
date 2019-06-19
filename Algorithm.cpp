@@ -10,7 +10,6 @@ Algorithm::Algorithm(Network* currentNetwork, const string& nmapOutputFileName)
 	@return 	void
 */
 {
-    cout << currentNetwork->getName() << endl;
     currentNetwork_ = currentNetwork;
     nmapFileName_ = nmapOutputFileName;
 }
@@ -26,10 +25,7 @@ bool Algorithm::findNextUpHost(istream& nmapFile)
 	{
 		if(line_.find("Nmap scan report for") != string::npos
 			&& line_.find("host down") == string::npos)
-			{
-				cout << line_ << endl;
 				return true;
-			}
 		else
 			getline(nmapFile, line_);
 	}
@@ -128,12 +124,5 @@ void Algorithm::operator() ()
 		currHost.setModel(findModel());
 		currHost.setOs(findOs(nmapFile));
 		currentNetwork_->add(make_pair<string, Host*>(currHost.getMacAdress(), new Host(currHost)));
-
-        cout << currHost.getIp() << endl;
-        cout << currHost.getLatency() << endl;
-        cout << currHost.getMacAdress() << endl;
-        cout << currHost.getModel() << endl;
-		cout << currHost.getOs() << endl;
-		cout << endl << endl;
 	}
 }

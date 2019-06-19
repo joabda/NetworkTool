@@ -12,19 +12,13 @@ Host::Host() :
     macAdress_("0")
 {}
 
-/*
-	@det		Deestructor of a host
-	@param 		void
-	@return 	void
-*/
-Host::~Host()
-{
-	for_each(conteneur_.begin(), conteneur_.end(), [](Port* toDelete) 
-	{
-		delete toDelete;
-	}
-	);
-}
+Host::Host(const string& ip, const string& macAdress, int latency, const string& model, const string& os) :
+	ip_(ip),
+    macAdress_(macAdress),
+	latency_(latency),
+	model_(model),
+	os_(os)
+{}
 
 void Host::setIp(const string& ip)
 /*
@@ -75,11 +69,6 @@ void Host::setModel(const string& model)
 void Host::setOs(const string& os)
 {
 	os_ = os;
-}
-
-void Host::setOsVersion(const string& osVersion)
-{
-	osVersion_ = osVersion;
 }
 
 void Host::setManufacturer(const string& manufacturer)
@@ -137,11 +126,6 @@ string Host::getOs() const
 	return os_;
 }
 
-string Host::getOsVersion() const
-{
-	return osVersion_;
-}
-
 string Host::getManufacturer() const
 {
 	return manufacturer_;
@@ -155,7 +139,6 @@ Host& Host::operator+= (Port* portAdd)
 	@return 	Host&	Reference to the host (in order to be able to do multiple +=)
 */
 {
-    // listOfPorts_.push_back(portAdd);
 	add(portAdd);
     return *this;
 }
@@ -183,4 +166,18 @@ ostream& operator<<(ostream& os, const Host& toPrint)
 	);
 	os << endl;
 	return os;
+}
+
+/*
+	@det		Deestructor of a host
+	@param 		void
+	@return 	void
+*/
+Host::~Host()
+{
+	for_each(conteneur_.begin(), conteneur_.end(), [](Port* toDelete) 
+	{
+		delete toDelete;
+	}
+	);
 }

@@ -1,6 +1,8 @@
 *.o
 *.out
 *.hex
+*.db
 NmapOutput.txt
 logFile.txt
 temporary.txt
+print.txt

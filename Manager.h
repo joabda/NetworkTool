@@ -17,9 +17,9 @@ public:
 */
 	C getContainer() const 
 	{
-		C nouveauConteneur;
-		nouveauConteneur = conteneur_;
-		return nouveauConteneur;
+		C copiedContainer;
+		copiedContainer = container_;
+		return copiedContainer;
 	}
 
 /*	@det	Adding an element to the container
@@ -28,7 +28,7 @@ public:
 */
 	void add(T t)
 	{
-		conteneur_.insert(t);
+		container_.insert(t);
 	}
 
 /*	@det	Getter for the number of elements inside the container
@@ -37,9 +37,14 @@ public:
 */
 	int getNumberOfElements() const
 	{
-		return conteneur_.size();
+		return container_.size();
+	}
+
+	C* getPointerToContainer() 
+	{
+		return &container_;
 	}
 
 protected:
-	C conteneur_;
+	C container_;
 };

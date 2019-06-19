@@ -2,7 +2,8 @@
 
 Network::Network():
 	name_("Network 1"),
-	ip_("Undefined yet")
+	ip_("Undefined")
+	// db_("Netwokrs", ip_)
 /*
 	@det 		Default constructor of a Network will set the attributs to default values
 	@param 		void
@@ -19,7 +20,8 @@ Network::Network():
 
 Network::Network(const string& networkName) :
 	name_(networkName),
-	ip_("Undefined yet")
+	ip_("Undefined")
+	// db_("Netwokrs", ip_)
 /*
 	@det 		Constructor of a Network will set the attributs to given values
 	@param 		string 	Name to be given to network
@@ -76,8 +78,8 @@ Host* Network::findHost(const string& macAdress) const noexcept
 	@return 	Host*		Pointer to the found host, or nullptr if the host is not found
 */
 {
-	if(conteneur_.find(macAdress) != conteneur_.end())
-		return conteneur_.at(macAdress);
+	if(container_.find(macAdress) != container_.end())
+		return container_.at(macAdress);
 	return nullptr;
 }
 
@@ -143,8 +145,8 @@ void Network::findIp()
 				}
                 else
                 {
+					log_ << "Error 1: Network's IP could not be found!" << endl;
                     exit(1);
-                    cout << "Error 1: Network's IP could not be found!" << endl;
                 }
 			}
 		}
@@ -162,6 +164,25 @@ void Network::processNmapData()
 {
 	Algorithm treatFile(this, nmapOutputFileName);
 	treatFile();
+	log_ << "Nmap output has been treated." << endl;
+}
+
+void Network::compareToDB()
+{
+	DataBase db("Netwokrs", ip_);
+	map<string, Host*>dbHosts = db.readDB();
+	for(auto& currHost : container_)
+	{
+		if(currHost.first != "No Available MAC Adress")
+		{
+			auto hostInDB = dbHosts.find(currHost.first);
+			if(hostInDB == dbHosts.end())
+				log_ << currHost.first << " just joined the network using the following IP: " << currHost.second->getIp() << " ." << endl;
+			else
+				if(hostInDB->second->getModel() != currHost.second->getModel())
+					log_ << "There's a problem with " << currHost.first << " model do not match information from database." << endl;
+		}
+	}
 }
 
 Network& Network::operator+= (Host* hostToAdd)
@@ -183,8 +204,7 @@ ostream& operator<< (ostream& os, const Network& networkPrint)
 */
 {
 	os << "\t\t\t"  << networkPrint.name_ << " at: " << networkPrint.ip_ << endl;
-	cout << "Nb elements in container: " << networkPrint.conteneur_.size() << endl;
-	for_each(networkPrint.conteneur_.begin(), networkPrint.conteneur_.end(), [&os](pair<string,Host*> toPrint)
+	for_each(networkPrint.container_.begin(), networkPrint.container_.end(), [&os](pair<string,Host*> toPrint)
 	{
 		os << *(toPrint.second);
 	}
@@ -210,15 +230,17 @@ void deleteFile(ostream &log, const string& toDelete)
 
 Network::~Network() 
 /*
-	@det 		Destructor of a Network, will delete all the hosts
+	@det 		Destructor of a Network, will save the hosts to the DB before deleting them
 	@param 		void
 	@return 	void
 */
 {
-	auto it = conteneur_.begin();
-	for_each(it, conteneur_.end(), [](pair<string, Host*> pairToDelete) 
-	{
-		delete pairToDelete.second;
-	}
+	DataBase db("Netwokrs", ip_);
+	db << (*this);
+	auto it = container_.begin();
+	for_each(it, container_.end(), [](pair<string, Host*> pairToDelete) 
+		{
+			delete pairToDelete.second;
+		}
 	);
 }
