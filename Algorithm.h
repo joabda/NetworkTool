@@ -12,6 +12,7 @@ class Algorithm
 public:
     Algorithm(Network* currentNetwork, const string& nmapOutputFileName);
     void operator() ();
+    ~Algorithm() {}
 
 private:
     Network* currentNetwork_;

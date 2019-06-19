@@ -2,16 +2,11 @@
 
 static int lengthOfMacAdress = 17;
 
-Algorithm::Algorithm(Network* currentNetwork, const string& nmapOutputFileName)
-/*
-	@det 		Constructor of the algorithm
-	@param 		Network* 	network where to add the hosts created
-				string 		name of the file to be read
-	@return 	void
-*/
+Algorithm::Algorithm(Network* currentNetwork, const string& nmapOutputFileName) :
+	currentNetwork_(currentNetwork),
+	nmapFileName_(nmapOutputFileName)
 {
-    currentNetwork_ = currentNetwork;
-    nmapFileName_ = nmapOutputFileName;
+	
 }
 
 bool Algorithm::findNextUpHost(istream& nmapFile)
@@ -114,7 +109,7 @@ void Algorithm::operator() ()
 	@return 	void
 */
 {
-    ifstream nmapFile(nmapFileName_);
+    ifstream nmapFile(nmapOutputFileName);
 	while(findNextUpHost(nmapFile))
 	{
 		Host currHost;

@@ -151,8 +151,15 @@ void Network::findIp()
 			}
 		}
 	}
+
 	temporaryFile.close();
-	deleteFile(log_, "temporary.txt");
+	string removeFile = "rm temporary.txt";
+	system(removeFile.c_str());
+	int returnOfDelete = remove("temporary.txt");
+	if (returnOfDelete == 0)
+		log_ << "temporary.txt" << " has been deleted successfully." << endl;
+	else
+		log_ << "Error: Unable to delete " << "temporary.txt" << "." << endl;
 }
 
 void Network::setPrefix(const string& prefix)
@@ -162,8 +169,8 @@ void Network::setPrefix(const string& prefix)
 
 void Network::processNmapData()
 {
-	Algorithm treatFile(this, nmapOutputFileName);
-	treatFile();
+	Algorithm processNmapAlgorithm(this, nmapOutputFileName);
+	processNmapAlgorithm();
 	log_ << "Nmap output has been treated." << endl;
 }
 
@@ -212,22 +219,6 @@ ostream& operator<< (ostream& os, const Network& networkPrint)
 	return os;
 }
 
-void deleteFile(ostream &log, const string& toDelete)
-/*
-	@det 		This function will delete a certain file that is no longer needed
-	@param 		ostream&	Log file where everything during the executing will be placed to analyse any error
-	@return 	string&		Name of the file to be deleted
-*/
-{
-	string removeFile = "rm " + toDelete;
-	system(removeFile.c_str());
-	int returnOfDelete = remove(toDelete.c_str());
-	if (returnOfDelete == 0)
-		log << toDelete << " has been deleted successfully." << endl;
-	else
-		log << "Error: Unable to delete " << toDelete << "." << endl;
-}
-
 Network::~Network() 
 /*
 	@det 		Destructor of a Network, will save the hosts to the DB before deleting them
@@ -239,8 +230,8 @@ Network::~Network()
 	db << (*this);
 	auto it = container_.begin();
 	for_each(it, container_.end(), [](pair<string, Host*> pairToDelete) 
-		{
-			delete pairToDelete.second;
-		}
+	{
+		delete pairToDelete.second;
+	}
 	);
 }

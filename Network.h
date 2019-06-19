@@ -48,4 +48,3 @@ private:
     string prefix_;
     ofstream log_;
 };
-void deleteFile(ostream &log, const string& toDelete);

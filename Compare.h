@@ -4,6 +4,7 @@
 
 class Compare
 {
-    Compare(map<string,Host*> recentScan, map<string, Host*>& fromDB);
-
+    Compare() = delete;
+    void operator() (map<string,Host*> recentScan, map<string, Host*>& fromDB);
+    ~Compare() {}
 };
