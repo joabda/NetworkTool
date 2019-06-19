@@ -1,26 +1,26 @@
-			Test Network at: Undefined yet
+			Network 1 at: 192.168.1.1
 192.168.1.101
  Host is down
- Latency: 0.0041s
+ Latency: 0.0071s
  MAC Adress: 00:FC:8B:7B:4E:6D
 
 192.168.1.1
  Host is down
- Latency: 0.0095s
+ Latency: 0.0066s
  MAC Adress: 68:7F:74:0C:D0:2B
+
+192.168.1.104
+ Host is down
+ Latency: 0.0053s
+ MAC Adress: 88:D7:F6:27:FC:16
 
 192.168.1.102
  Host is down
- Latency: 0.0052s
+ Latency: 0.0063s
  MAC Adress: E0:76:D0:B2:76:E6
-
-192.168.1.100
- Host is down
- Latency: 0.016s
- MAC Adress: E8:5B:5B:4A:39:F7
 
 192.168.1.108
  Host is down
- Latency: 1.1e-05s
- MAC Adress: NULL
+ Latency: 1e-05s
+ MAC Adress: No Available MAC Adress
 

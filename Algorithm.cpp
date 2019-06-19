@@ -78,7 +78,7 @@ string Algorithm::findMac(istream& nmapFile)
 		else
 			return line_.substr(13, lengthOfMacAdress);
 	}
-	return "NULL";
+	return "No Available MAC Adress";
 }
 
 string Algorithm::findModel() const

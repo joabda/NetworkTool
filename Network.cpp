@@ -215,7 +215,6 @@ Network::~Network()
 	@return 	void
 */
 {
-	// saveInDB();
 	auto it = conteneur_.begin();
 	for_each(it, conteneur_.end(), [](pair<string, Host*> pairToDelete) 
 	{
