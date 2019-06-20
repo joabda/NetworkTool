@@ -163,11 +163,22 @@ void Network::findIp()
 }
 
 void Network::setPrefix(const string& prefix)
+/*
+	@det 		Setter for the network's prefix, should only be used for test
+	@param 		string prefix to be set
+	@return 	void
+*/
 {
 	prefix_ = prefix;
 }
 
 void Network::processNmapData()
+/*
+	@det 		Function to process the nmap output file
+					save hosts in a container
+	@param 		void
+	@return 	void
+*/
 {
 	Algorithm processNmapAlgorithm(this, nmapOutputFileName);
 	processNmapAlgorithm();
@@ -175,6 +186,12 @@ void Network::processNmapData()
 }
 
 void Network::compareToDB()
+/*
+	@det 		Get hosts existing in DB, comapare to the new scan's hosts
+					and send notification about the new ones
+	@param 		void
+	@return 	void
+*/
 {
 	DataBase db("Netwokrs", ip_);
 	map<string, Host*>dbHosts = db.readDB();
