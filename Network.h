@@ -12,6 +12,7 @@
 #include "Host.h"
 #include "DataBase.h"
 #include "Compare.h"
+#include "LinuxNotification.h"
 using namespace std;
 
 static string nmapOutputFileName = "NmapOutput.txt";
