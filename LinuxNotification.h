@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include "Host.h"
 using namespace std;
 
@@ -9,7 +10,7 @@ class LinuxNotifyManager
 {
 public:
     LinuxNotifyManager(const string& imagePath = "NULL", const string& appName = "NetworkTool");
-    bool notifyEvent(Host* newHost) const;
+    bool notifyEvent(Host* newHost);
     ~LinuxNotifyManager() {}
 
 private:
@@ -17,6 +18,6 @@ private:
     string imagePath_;
     string appName_;
     string addHostInfos(Host* newHost) const;
-    string addImage() const;
+    string addImage();
     string addAppName() const;
 };

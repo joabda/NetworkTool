@@ -13,8 +13,13 @@ string LinuxNotifyManager::addHostInfos(Host* newHost) const
         " joined under ip: " + newHost->getIp() + QUOTE + " ";
 }
 
-string LinuxNotifyManager::addImage() const
+string LinuxNotifyManager::addImage()
 {
+    system("pwd > currentDirectory.txt");
+    ifstream pathFile("currentDirectory.txt");
+    pathFile >> imagePath_;
+    imagePath_ += "/warning.png";
+	system("rm currentDirectory.txt");
     return "-i " + imagePath_ + " ";
 }
 
@@ -23,13 +28,13 @@ string LinuxNotifyManager::addAppName() const
     return "-a " + QUOTE + appName_ + QUOTE + " ";
 }
 
-bool LinuxNotifyManager::notifyEvent(Host* newHost) const
+bool LinuxNotifyManager::notifyEvent(Host* newHost)
 {
     string fullCommand = baseCommand_;
     fullCommand += QUOTE + "New Device on Network" + QUOTE + " ";
     fullCommand += addHostInfos(newHost);
-    if(imagePath_ != "NULL")
-        fullCommand += addImage();
+    //if(imagePath_ != "NULL")
+    fullCommand += addImage();
     fullCommand += addAppName();
 
     int systemReturn = system( fullCommand.c_str() );
