@@ -1,20 +1,40 @@
 #include "LinuxNotification.h"
 
-LinuxNotifyManager::LinuxNotifyManager()
+LinuxNotifyManager::LinuxNotifyManager(const string& imagePath, const string& appName)
 {
     baseCommand_ = "notify-send ";
+    imagePath_ = imagePath;
+    appName_ = appName;
 }
 
-string LinuxNotifyManager::hostInfos(Host* newHost) const
+string LinuxNotifyManager::addHostInfos(Host* newHost) const
 {
-    return '"' + newHost->getMacAdress() + " joined under ip: " + newHost->getIp() + '"' + "\n";
+    return QUOTE + "<b>" + newHost->getMacAdress() + "</b>" +
+        " joined under ip: " + newHost->getIp() + QUOTE + " ";
+}
+
+string LinuxNotifyManager::addImage() const
+{
+    return "-i " + imagePath_ + " ";
+}
+
+string LinuxNotifyManager::addAppName() const
+{
+    return "-a " + QUOTE + appName_ + QUOTE + " ";
 }
 
 bool LinuxNotifyManager::notifyEvent(Host* newHost) const
 {
-    system( (baseCommand_+hostInfos(newHost) ).c_str() );
-    
-    // "Make sur the process is done"
-    return  true;
-}
+    string fullCommand = baseCommand_;
+    fullCommand += QUOTE + "New Device on Network" + QUOTE + " ";
+    fullCommand += addHostInfos(newHost);
+    if(imagePath_ != "NULL")
+        fullCommand += addImage();
+    fullCommand += addAppName();
 
+    int systemReturn = system( fullCommand.c_str() );
+
+    if (WIFEXITED(systemReturn))
+        return true;
+    return false;
+}
