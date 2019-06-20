@@ -1,27 +1,24 @@
 #include "Network.h"
-#include <algorithm>
 
 using namespace std;
 
 int main()
 {
 	Network testNetwork;
-	testNetwork.setName("Home Network");
-	testNetwork.setPrefix("192.168.1.");
-	// ofstream log("logFile.txt");
-	// try
-	// {
-	// 	testNetwork.findIp();
-	// }
-	// catch(const runtime_error& error)
-	// {
-	// 	log 	<< error.what() 									<< endl;
-	// 	cout 	<< "Exiting program, could not find Network's IP" 	<< endl;
-	// }
+	ofstream log("logFile.txt");
+	try
+	{
+		testNetwork.findIp();
+	}
+	catch(const runtime_error& error)
+	{
+		log 	<< error.what() 									<< endl;
+		cout 	<< "Exiting program, could not find Network's IP" 	<< endl;
+	}
 
-	// testNetwork.nmapCommand();
+	testNetwork.nmapCommand();
 	testNetwork.processNmapData();
-	ofstream testPrint("print.txt");
+	ofstream testPrint("Hosts.txt");
 	testPrint << testNetwork;
 	testNetwork.compareToDB();
 }

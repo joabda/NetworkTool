@@ -1,0 +1,16 @@
+			Network 1 at: 192.168.1.1
+192.168.1.1
+ Host is down
+ Latency: 0.0097s
+ MAC Adress: 68:7F:74:0C:D0:2B
+
+192.168.1.106
+ Host is down
+ Latency: 0.0041s
+ MAC Adress: 8C:F5:A3:02:40:8E
+
+192.168.1.108
+ Host is down
+ Latency: 3e-06s
+ MAC Adress: No Available MAC Adress
+

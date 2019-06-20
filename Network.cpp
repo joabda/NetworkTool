@@ -3,7 +3,6 @@
 Network::Network():
 	name_("Network 1"),
 	ip_("Undefined")
-	// db_("Netwokrs", ip_)
 /*
 	@det 		Default constructor of a Network will set the attributs to default values
 	@param 		void
@@ -21,7 +20,6 @@ Network::Network():
 Network::Network(const string& networkName) :
 	name_(networkName),
 	ip_("Undefined")
-	// db_("Netwokrs", ip_)
 /*
 	@det 		Constructor of a Network will set the attributs to given values
 	@param 		string 	Name to be given to network
@@ -193,7 +191,7 @@ void Network::compareToDB()
 	@return 	void
 */
 {
-	DataBase db("Netwokrs", ip_);
+	DataBase db("Networks", ip_);
 	map<string, Host*>dbHosts = db.readDB();
 	LinuxNotifyManager notification;
 	for(auto& currHost : container_)
