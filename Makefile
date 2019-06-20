@@ -52,10 +52,6 @@ clean:
 cleanLog:
 	rm logFile.txt
 
-# debuging: 
-# CXXFLAGS := $(CXXFLAGS) -g 
-# 	@echo "Generating files in debug mode"	
-# 	$(EXEC)
 	
 # Instruction to check for memory leaks with valgrind
 debug-memory: $(EXEC)
