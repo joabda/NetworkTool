@@ -62,16 +62,31 @@ void Host::setMacAdress(const string& macAdress)
 }
 
 void Host::setModel(const string& model)
+/*
+	@det		This function will set the Model of a Host
+	@param 		string Model to be given to a Host
+	@return 	void
+*/
 {
 	model_ = model;	
 }
 
 void Host::setOs(const string& os)
+/*
+	@det		This function will set the Operating System of a Host
+	@param 		string	Operating System to be given to a Host
+	@return 	void
+*/
 {
 	os_ = os;
 }
 
 void Host::setManufacturer(const string& manufacturer)
+/*
+	@det		This function will set the Manufacturer of a Host
+	@param 		string	Manufacturer to be given to a Host
+	@return 	void
+*/
 {
 	manufacturer_ = manufacturer;
 }
@@ -117,16 +132,31 @@ string Host::getMacAdress() const
 }
 
 string Host::getModel() const
+/*
+	@det		This function will get the Model of the current Host
+	@param 		void
+	@return 	string	Model of the Host
+*/
 {
 	return model_;
 }
 
 string Host::getOs() const
+/*
+	@det		This function will get the Operating System of the current Host
+	@param 		void
+	@return 	string Operating System of the Host
+*/
 {
 	return os_;
 }
 
 string Host::getManufacturer() const
+/*
+	@det		This function will get the manufacturer of the current Host
+	@param 		void
+	@return 	string	manufacturerof the Host
+*/
 {
 	return manufacturer_;
 }
@@ -143,13 +173,13 @@ Host& Host::operator+= (Port* portAdd)
     return *this;
 }
 
+ostream& operator<<(ostream& os, const Host& toPrint)
 /*
 	@det		This function will print everything about a host on a specific stream
 	@param 		ostream&	Stream where the infos will be printed
 	@param		Host&		Host to be printed
 	@return 	Host&	  	Reference to the host that we want to print out
 */
-ostream& operator<<(ostream& os, const Host& toPrint)
 {
     os << toPrint.ip_ << endl;
 	if(toPrint.status_ == 1)
@@ -159,7 +189,7 @@ ostream& operator<<(ostream& os, const Host& toPrint)
 		
 	os << " Latency: " 		<< toPrint.latency_ 	<< "s" 	<< endl;
 	os << " MAC Adress: "	<< toPrint.macAdress_   << endl;
-	for_each(toPrint.conteneur_.begin(), toPrint.conteneur_.end(),  [&os](Port* toPrint)
+	for_each(toPrint.container_.begin(), toPrint.container_.end(),  [&os](Port* toPrint)
 	{
 		os << *toPrint;
 	}
@@ -168,14 +198,14 @@ ostream& operator<<(ostream& os, const Host& toPrint)
 	return os;
 }
 
+Host::~Host()
 /*
 	@det		Deestructor of a host
 	@param 		void
 	@return 	void
 */
-Host::~Host()
 {
-	for_each(conteneur_.begin(), conteneur_.end(), [](Port* toDelete) 
+	for_each(container_.begin(), container_.end(), [](Port* toDelete) 
 	{
 		delete toDelete;
 	}

@@ -204,7 +204,8 @@ void Network::compareToDB()
 			if(hostInDB == dbHosts.end())
 			{
 				log_ << currHost.first << " just joined the network using the following IP: " << currHost.second->getIp() << " ." << endl;
-				notification.notifyEvent(currHost.second);
+				if(!notification.notifyEvent(currHost.second))
+					log_ << "New Host " << currHost.first << endl;
 			}
 			else
 				if(hostInDB->second->getModel() != currHost.second->getModel())
