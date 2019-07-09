@@ -65,6 +65,11 @@ string Network::getIp() const noexcept
 }
 
 string Network::getPrefix() const noexcept
+/*
+	@det 		This function will get the prefix of the current network
+	@param 		void
+	@return 	string	preffix of the network
+*/
 {
 	return prefix_;
 }
@@ -246,7 +251,7 @@ Network::~Network()
 	@return 	void
 */
 {
-	DataBase db("Netwokrs", ip_);
+	DataBase db("Networks", ip_);
 	db << (*this);
 	auto it = container_.begin();
 	for_each(it, container_.end(), [](pair<string, Host*> pairToDelete) 

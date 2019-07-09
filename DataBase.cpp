@@ -135,7 +135,17 @@ void operator<<(DataBase& dataBase, const Network& networkToSave)
 }
 
 DataBase::~DataBase()
+/*
+	@det		Destructor of Database class, will close the connection and 
+					print that in the logfile
+	@param 		void
+	@return 	void
+*/
 {
-	log_ << "DataBase closed." << endl;
+	if(!log_.is_open())
+	{ // most probably log_ will be closed, cause c++ calls detructors in inverted orders
+		ofstream log("logFile.txt", ios::out | ios::app); 
+		log << "DataBase closed." << endl;
+	}
 	sqlite3_close(db_);
 }

@@ -14,8 +14,9 @@ Host::Host() :
 
 Host::Host(const string& ip, const string& macAdress, int latency, const string& model, const string& os) :
 	ip_(ip),
-    macAdress_(macAdress),
+	status_(0),
 	latency_(latency),
+    macAdress_(macAdress),
 	model_(model),
 	os_(os)
 {}
@@ -186,7 +187,7 @@ ostream& operator<<(ostream& os, const Host& toPrint)
 		os << " Host is up" 	<< endl;
 	else
 		os << " Host is down"	<< endl;
-		
+
 	os << " Latency: " 		<< toPrint.latency_ 	<< "s" 	<< endl;
 	os << " MAC Adress: "	<< toPrint.macAdress_   << endl;
 	for_each(toPrint.container_.begin(), toPrint.container_.end(),  [&os](Port* toPrint)
