@@ -17,6 +17,7 @@ class DataBase
         void error(const string& message);
         string getNetworkTable() const;
         map<string, Host*> readDB();
+        bool isInDB(const string& mac);
         friend void operator<<(DataBase& dataBase, const Network& networkToSave);
         ~DataBase();
 

@@ -76,7 +76,7 @@ map<string, Host*> DataBase::readDB()
 	if (rc_ != SQLITE_OK)
 		error("Cannot open database");
 
-	string read = "SELECT * from " + networkTable_;
+	string read = "SELECT * from " + networkTable_  + ";";
 	sqlite3_stmt* stmt;
 	rc_ = sqlite3_prepare_v2(db_, read.c_str(), -1, &stmt, nullptr);
 
@@ -103,6 +103,21 @@ map<string, Host*> DataBase::readDB()
 	}
 		
 	return dbHosts;
+}
+
+bool DataBase::isInDB(const string& mac)
+{
+	rc_ = sqlite3_open((dbName_ + ".db").c_str(), &db_);
+	
+	if (rc_ != SQLITE_OK)
+		error("Cannot open database");
+
+	string read = "SELECT * from " + networkTable_ + " WHERE MAC = '" + mac + "';";
+	sqlite3_stmt* stmt;
+	rc_ = sqlite3_prepare_v2(db_, read.c_str(), -1, &stmt, nullptr);
+	cout << mac << " is in db: " <<  boolalpha << (rc_ == SQLITE_OK) << endl;
+	cout << rc_ << endl;
+	return (rc_ = sqlite3_step(stmt) ) == SQLITE_ROW;
 }
 
 void operator<<(DataBase& dataBase, const Network& networkToSave)

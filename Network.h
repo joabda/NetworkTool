@@ -11,7 +11,7 @@
 #include "Manager.h"
 #include "Host.h"
 #include "DataBase.h"
-#include "Compare.h"
+// #include "Compare.h"
 #include "LinuxNotification.h"
 using namespace std;
 
@@ -43,7 +43,6 @@ public:
     friend ostream& operator<< (ostream& os, const Network& networkPrint); 
 
 private:
-    //DataBase db_;
     string name_;
     string ip_;
     string prefix_;

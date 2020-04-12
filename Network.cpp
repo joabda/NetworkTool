@@ -197,22 +197,23 @@ void Network::compareToDB()
 */
 {
 	DataBase db("Networks", ip_);
-	map<string, Host*>dbHosts = db.readDB();
+	// map<string, Host*>dbHosts = db.readDB();
 	LinuxNotifyManager notification;
 	for(auto& currHost : container_)
 	{
 		if(currHost.first != "No Available MAC Adress")
 		{
-			auto hostInDB = dbHosts.find(currHost.first);
-			if(hostInDB == dbHosts.end())
+			// auto hostInDB = dbHosts.find(currHost.first);
+
+			if(!db.isInDB(currHost.first))
 			{
 				log_ << currHost.first << " just joined the network using the following IP: " << currHost.second->getIp() << " ." << endl;
 				if(!notification.notifyEvent(currHost.second))
 					log_ << "New Host " << currHost.first << endl;
 			}
-			else
-				if(hostInDB->second->getModel() != currHost.second->getModel())
-					log_ << "There's a problem with " << currHost.first << " model do not match information from database." << endl;
+			// else
+			// 	if(hostInDB->second->getModel() != currHost.second->getModel())
+			// 		log_ << "There's a problem with " << currHost.first << " model do not match information from database." << endl;
 		}
 	}
 }

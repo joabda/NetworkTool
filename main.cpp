@@ -6,12 +6,9 @@ int main()
 {
 	Network testNetwork;
 	ofstream log("logFile.txt");
-	try
-	{
+	try {
 		testNetwork.findIp();
-	}
-	catch(const runtime_error& error)
-	{
+	} catch(const runtime_error& error) {
 		log 	<< error.what() 									<< endl;
 		cout 	<< "Exiting program, could not find Network's IP" 	<< endl;
 	}

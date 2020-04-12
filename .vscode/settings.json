@@ -8,7 +8,8 @@
         "new": "cpp",
         "set": "cpp",
         "ostream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "optional": "cpp"
     },
     "python.pythonPath": "/home/ja/anaconda3/bin/python"
 }
