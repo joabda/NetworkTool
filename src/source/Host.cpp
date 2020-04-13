@@ -1,4 +1,4 @@
-#include "Host.h"
+#include "../header/Host.h"
 
 /*
 	@det		Default constructor of a host, init all atributes to 0

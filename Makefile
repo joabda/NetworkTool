@@ -56,6 +56,30 @@ CMAKE_BINARY_DIR = /home/ja/Documents/NetworkTool
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -66,6 +90,39 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -123,194 +180,272 @@ NetworkTool/fast:
 	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/build
 .PHONY : NetworkTool/fast
 
-Algorithm.o: Algorithm.cpp.o
+#=============================================================================
+# Target rules for targets named core
 
-.PHONY : Algorithm.o
+# Build rule for target.
+core: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 core
+.PHONY : core
 
-# target to build an object file
-Algorithm.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Algorithm.cpp.o
-.PHONY : Algorithm.cpp.o
+# fast build rule for target.
+core/fast:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/build
+.PHONY : core/fast
 
-Algorithm.i: Algorithm.cpp.i
+#=============================================================================
+# Target rules for targets named gmock_main
 
-.PHONY : Algorithm.i
+# Build rule for target.
+gmock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock_main
+.PHONY : gmock_main
 
-# target to preprocess a source file
-Algorithm.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Algorithm.cpp.i
-.PHONY : Algorithm.cpp.i
+# fast build rule for target.
+gmock_main/fast:
+	$(MAKE) -f googletest/googlemock/CMakeFiles/gmock_main.dir/build.make googletest/googlemock/CMakeFiles/gmock_main.dir/build
+.PHONY : gmock_main/fast
 
-Algorithm.s: Algorithm.cpp.s
+#=============================================================================
+# Target rules for targets named gmock
 
-.PHONY : Algorithm.s
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock
+.PHONY : gmock
 
-# target to generate assembly for a file
-Algorithm.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Algorithm.cpp.s
-.PHONY : Algorithm.cpp.s
+# fast build rule for target.
+gmock/fast:
+	$(MAKE) -f googletest/googlemock/CMakeFiles/gmock.dir/build.make googletest/googlemock/CMakeFiles/gmock.dir/build
+.PHONY : gmock/fast
 
-DataBase.o: DataBase.cpp.o
+#=============================================================================
+# Target rules for targets named gtest_main
 
-.PHONY : DataBase.o
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
 
-# target to build an object file
-DataBase.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/DataBase.cpp.o
-.PHONY : DataBase.cpp.o
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f googletest/googletest/CMakeFiles/gtest_main.dir/build.make googletest/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
 
-DataBase.i: DataBase.cpp.i
+#=============================================================================
+# Target rules for targets named gtest
 
-.PHONY : DataBase.i
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
 
-# target to preprocess a source file
-DataBase.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/DataBase.cpp.i
-.PHONY : DataBase.cpp.i
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f googletest/googletest/CMakeFiles/gtest.dir/build.make googletest/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
 
-DataBase.s: DataBase.cpp.s
+#=============================================================================
+# Target rules for targets named NetworkToolTest
 
-.PHONY : DataBase.s
+# Build rule for target.
+NetworkToolTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NetworkToolTest
+.PHONY : NetworkToolTest
 
-# target to generate assembly for a file
-DataBase.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/DataBase.cpp.s
-.PHONY : DataBase.cpp.s
+# fast build rule for target.
+NetworkToolTest/fast:
+	$(MAKE) -f tests/CMakeFiles/NetworkToolTest.dir/build.make tests/CMakeFiles/NetworkToolTest.dir/build
+.PHONY : NetworkToolTest/fast
 
-Host.o: Host.cpp.o
+src/source/Algorithm.o: src/source/Algorithm.cpp.o
 
-.PHONY : Host.o
-
-# target to build an object file
-Host.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Host.cpp.o
-.PHONY : Host.cpp.o
-
-Host.i: Host.cpp.i
-
-.PHONY : Host.i
-
-# target to preprocess a source file
-Host.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Host.cpp.i
-.PHONY : Host.cpp.i
-
-Host.s: Host.cpp.s
-
-.PHONY : Host.s
-
-# target to generate assembly for a file
-Host.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Host.cpp.s
-.PHONY : Host.cpp.s
-
-LinuxNotification.o: LinuxNotification.cpp.o
-
-.PHONY : LinuxNotification.o
+.PHONY : src/source/Algorithm.o
 
 # target to build an object file
-LinuxNotification.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/LinuxNotification.cpp.o
-.PHONY : LinuxNotification.cpp.o
+src/source/Algorithm.cpp.o:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Algorithm.cpp.o
+.PHONY : src/source/Algorithm.cpp.o
 
-LinuxNotification.i: LinuxNotification.cpp.i
+src/source/Algorithm.i: src/source/Algorithm.cpp.i
 
-.PHONY : LinuxNotification.i
+.PHONY : src/source/Algorithm.i
 
 # target to preprocess a source file
-LinuxNotification.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/LinuxNotification.cpp.i
-.PHONY : LinuxNotification.cpp.i
+src/source/Algorithm.cpp.i:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Algorithm.cpp.i
+.PHONY : src/source/Algorithm.cpp.i
 
-LinuxNotification.s: LinuxNotification.cpp.s
+src/source/Algorithm.s: src/source/Algorithm.cpp.s
 
-.PHONY : LinuxNotification.s
+.PHONY : src/source/Algorithm.s
 
 # target to generate assembly for a file
-LinuxNotification.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/LinuxNotification.cpp.s
-.PHONY : LinuxNotification.cpp.s
+src/source/Algorithm.cpp.s:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Algorithm.cpp.s
+.PHONY : src/source/Algorithm.cpp.s
 
-Network.o: Network.cpp.o
+src/source/DataBase.o: src/source/DataBase.cpp.o
 
-.PHONY : Network.o
+.PHONY : src/source/DataBase.o
 
 # target to build an object file
-Network.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Network.cpp.o
-.PHONY : Network.cpp.o
+src/source/DataBase.cpp.o:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/DataBase.cpp.o
+.PHONY : src/source/DataBase.cpp.o
 
-Network.i: Network.cpp.i
+src/source/DataBase.i: src/source/DataBase.cpp.i
 
-.PHONY : Network.i
+.PHONY : src/source/DataBase.i
 
 # target to preprocess a source file
-Network.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Network.cpp.i
-.PHONY : Network.cpp.i
+src/source/DataBase.cpp.i:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/DataBase.cpp.i
+.PHONY : src/source/DataBase.cpp.i
 
-Network.s: Network.cpp.s
+src/source/DataBase.s: src/source/DataBase.cpp.s
 
-.PHONY : Network.s
+.PHONY : src/source/DataBase.s
 
 # target to generate assembly for a file
-Network.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Network.cpp.s
-.PHONY : Network.cpp.s
+src/source/DataBase.cpp.s:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/DataBase.cpp.s
+.PHONY : src/source/DataBase.cpp.s
 
-Port.o: Port.cpp.o
+src/source/Host.o: src/source/Host.cpp.o
 
-.PHONY : Port.o
+.PHONY : src/source/Host.o
 
 # target to build an object file
-Port.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Port.cpp.o
-.PHONY : Port.cpp.o
+src/source/Host.cpp.o:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Host.cpp.o
+.PHONY : src/source/Host.cpp.o
 
-Port.i: Port.cpp.i
+src/source/Host.i: src/source/Host.cpp.i
 
-.PHONY : Port.i
+.PHONY : src/source/Host.i
 
 # target to preprocess a source file
-Port.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Port.cpp.i
-.PHONY : Port.cpp.i
+src/source/Host.cpp.i:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Host.cpp.i
+.PHONY : src/source/Host.cpp.i
 
-Port.s: Port.cpp.s
+src/source/Host.s: src/source/Host.cpp.s
 
-.PHONY : Port.s
+.PHONY : src/source/Host.s
 
 # target to generate assembly for a file
-Port.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/Port.cpp.s
-.PHONY : Port.cpp.s
+src/source/Host.cpp.s:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Host.cpp.s
+.PHONY : src/source/Host.cpp.s
 
-main.o: main.cpp.o
+src/source/LinuxNotification.o: src/source/LinuxNotification.cpp.o
 
-.PHONY : main.o
+.PHONY : src/source/LinuxNotification.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/source/LinuxNotification.cpp.o:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/LinuxNotification.cpp.o
+.PHONY : src/source/LinuxNotification.cpp.o
 
-main.i: main.cpp.i
+src/source/LinuxNotification.i: src/source/LinuxNotification.cpp.i
 
-.PHONY : main.i
+.PHONY : src/source/LinuxNotification.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/source/LinuxNotification.cpp.i:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/LinuxNotification.cpp.i
+.PHONY : src/source/LinuxNotification.cpp.i
 
-main.s: main.cpp.s
+src/source/LinuxNotification.s: src/source/LinuxNotification.cpp.s
 
-.PHONY : main.s
+.PHONY : src/source/LinuxNotification.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/source/LinuxNotification.cpp.s:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/LinuxNotification.cpp.s
+.PHONY : src/source/LinuxNotification.cpp.s
+
+src/source/Network.o: src/source/Network.cpp.o
+
+.PHONY : src/source/Network.o
+
+# target to build an object file
+src/source/Network.cpp.o:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Network.cpp.o
+.PHONY : src/source/Network.cpp.o
+
+src/source/Network.i: src/source/Network.cpp.i
+
+.PHONY : src/source/Network.i
+
+# target to preprocess a source file
+src/source/Network.cpp.i:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Network.cpp.i
+.PHONY : src/source/Network.cpp.i
+
+src/source/Network.s: src/source/Network.cpp.s
+
+.PHONY : src/source/Network.s
+
+# target to generate assembly for a file
+src/source/Network.cpp.s:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Network.cpp.s
+.PHONY : src/source/Network.cpp.s
+
+src/source/Port.o: src/source/Port.cpp.o
+
+.PHONY : src/source/Port.o
+
+# target to build an object file
+src/source/Port.cpp.o:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Port.cpp.o
+.PHONY : src/source/Port.cpp.o
+
+src/source/Port.i: src/source/Port.cpp.i
+
+.PHONY : src/source/Port.i
+
+# target to preprocess a source file
+src/source/Port.cpp.i:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Port.cpp.i
+.PHONY : src/source/Port.cpp.i
+
+src/source/Port.s: src/source/Port.cpp.s
+
+.PHONY : src/source/Port.s
+
+# target to generate assembly for a file
+src/source/Port.cpp.s:
+	$(MAKE) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/source/Port.cpp.s
+.PHONY : src/source/Port.cpp.s
+
+src/source/main.o: src/source/main.cpp.o
+
+.PHONY : src/source/main.o
+
+# target to build an object file
+src/source/main.cpp.o:
+	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/src/source/main.cpp.o
+.PHONY : src/source/main.cpp.o
+
+src/source/main.i: src/source/main.cpp.i
+
+.PHONY : src/source/main.i
+
+# target to preprocess a source file
+src/source/main.cpp.i:
+	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/src/source/main.cpp.i
+.PHONY : src/source/main.cpp.i
+
+src/source/main.s: src/source/main.cpp.s
+
+.PHONY : src/source/main.s
+
+# target to generate assembly for a file
+src/source/main.cpp.s:
+	$(MAKE) -f CMakeFiles/NetworkTool.dir/build.make CMakeFiles/NetworkTool.dir/src/source/main.cpp.s
+.PHONY : src/source/main.cpp.s
 
 # Help Target
 help:
@@ -318,30 +453,41 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
+	@echo "... install/strip"
+	@echo "... install"
 	@echo "... NetworkTool"
+	@echo "... core"
+	@echo "... rebuild_cache"
+	@echo "... install/local"
+	@echo "... test"
+	@echo "... list_install_components"
 	@echo "... edit_cache"
-	@echo "... Algorithm.o"
-	@echo "... Algorithm.i"
-	@echo "... Algorithm.s"
-	@echo "... DataBase.o"
-	@echo "... DataBase.i"
-	@echo "... DataBase.s"
-	@echo "... Host.o"
-	@echo "... Host.i"
-	@echo "... Host.s"
-	@echo "... LinuxNotification.o"
-	@echo "... LinuxNotification.i"
-	@echo "... LinuxNotification.s"
-	@echo "... Network.o"
-	@echo "... Network.i"
-	@echo "... Network.s"
-	@echo "... Port.o"
-	@echo "... Port.i"
-	@echo "... Port.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... gmock_main"
+	@echo "... gmock"
+	@echo "... gtest_main"
+	@echo "... gtest"
+	@echo "... NetworkToolTest"
+	@echo "... src/source/Algorithm.o"
+	@echo "... src/source/Algorithm.i"
+	@echo "... src/source/Algorithm.s"
+	@echo "... src/source/DataBase.o"
+	@echo "... src/source/DataBase.i"
+	@echo "... src/source/DataBase.s"
+	@echo "... src/source/Host.o"
+	@echo "... src/source/Host.i"
+	@echo "... src/source/Host.s"
+	@echo "... src/source/LinuxNotification.o"
+	@echo "... src/source/LinuxNotification.i"
+	@echo "... src/source/LinuxNotification.s"
+	@echo "... src/source/Network.o"
+	@echo "... src/source/Network.i"
+	@echo "... src/source/Network.s"
+	@echo "... src/source/Port.o"
+	@echo "... src/source/Port.i"
+	@echo "... src/source/Port.s"
+	@echo "... src/source/main.o"
+	@echo "... src/source/main.i"
+	@echo "... src/source/main.s"
 .PHONY : help
 
 

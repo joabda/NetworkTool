@@ -1,4 +1,4 @@
-#include "LinuxNotification.h"
+#include "../header/LinuxNotification.h"
 
 LinuxNotifyManager::LinuxNotifyManager(const string& imagePath, const string& appName)
 /*

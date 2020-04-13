@@ -1,4 +1,4 @@
-#include "Network.h"
+#include "../header/Network.h"
 
 Network::Network():
 	name_("Network 1"),
